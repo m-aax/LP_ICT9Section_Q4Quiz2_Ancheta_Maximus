@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grades</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"; rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    body    {
+        background-color: rgb(254, 254, 254);
+    }
+    #grades{
+        background-color: rgb(240, 239, 239);
+        border-width: medium;
+        border-color: black;
+        border-style: solid;
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    .row{
+        flex: 25%;
+        padding: 25px;
+        text-align:center;
+        flex-wrap: wrap;
+        width: 1000px;
+        max-width: 1250px;
+        height: 500px;
+
+    }
+
+    .center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+</style>
+</head>
+<body>
+    <br>
+    <br>
+
+    <h1 class="text-center text-dark">Score Analyzer</h1>
+    <br>
+<div class="container" id="grades">
+            <div class="col">
+                <div class="row align-items-center">
+                            <div class="row align-items-center">
+                                <img src="math2.jpg" alt="Math">
+                                <input id="math" type="number" class="form-control" placeholder="Input your grade..." >
+                            </div>
+
+                            <div class="row align-items-center">
+                                <img src="science.webp" alt="Science">
+                                <input id="science" type="number" class="form-control" placeholder="Input your grade...">
+                            </div>
+
+                            <div class="row align-items-center">
+                                <img src="english.jpg" alt="English">
+
+                                <input id="english" type="number" class="form-control" placeholder="Input your grade...">
+                            </div>
+                </div>
+            </div>
+            <br>
+            <br>
+    <div class="center">
+    <button type="button" class="btn btn-warning" onclick="Calc_Grades()">Get Grade</button>
+    </div>
+        <br>
+        <br>
+
+    <h3 id="grade" text="dark" class="text-center"></h3>
+        <br>
+    <h3 id="display" text="green" class="text-center"></h3>
+    <br>
+    <br>
+</div>
+
+    <br>
+    <br>
+    <br>
+
+
+    <script>
+    function Calc_Grades(){
+    
+    let math = Number(document.getElementById('math').value);
+    let science = Number(document.getElementById('science').value);
+    let english = Number(document.getElementById('english').value);
+    let grade = ((math + science + english) / 3);
+
+    //invalid number
+    if (isNaN(math)|| isNaN(science)||isNaN(english)){
+        alert("Please enter valid numbers.");
+        return;
+    }
+
+
+    document.getElementById("grade").innerHTML = "Average Grade: " + grade;
+
+
+    let gradeCategory;        
+        if (grade >= 94) {
+            gradeCategory = 5;  // Excellent
+        } else if (grade >= 87 && grade < 94) {
+            gradeCategory = 4;  // Above satisfactory
+        } else if (grade >= 80 && grade < 87) {
+            gradeCategory = 3;  // Satisfactory
+        } else if (grade >= 75 && grade < 79.99) {
+            gradeCategory = 2;  // Need improvement
+        } else if (grade < 75) {
+            gradeCategory = 1;  // Poor
+        }
+
+    switch (gradeCategory) {
+            case 5:
+                document.getElementById('display').innerHTML = "Excellent. Keep up the good work.";
+                break;
+            case 4:
+                document.getElementById('display').innerHTML = "Above satisfactory. Nice work.";
+                break;
+            case 3:
+                document.getElementById('display').innerHTML = "Satisfactory. You passed but you can do better.";
+                break;
+            case 2:
+                document.getElementById('display').innerHTML = "Need improvement. Try to study more and raise your grades.";
+                break;
+            case 1:
+                document.getElementById('display').innerHTML = "Poor. Study more and focus on academics.";
+                break;
+            default:
+                document.getElementById('display').innerHTML = "Invalid grade.";
+                break;
+        }
+    
+    }
+    </script>
+</body>
+</html>
